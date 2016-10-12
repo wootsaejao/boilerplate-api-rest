@@ -1,0 +1,36 @@
+{
+  "dependencies": {
+    "asyncawait": "^1.0.6",
+    "boom": "^4.1.0",
+    "cross-env": "^3.1.2",
+    "hapi": "^15.1.1",
+    "mongoose": "^4.6.3"
+  },
+  "devDependencies": {
+    "bluebird": "^3.4.6",
+    "chai": "^3.5.0",
+    "concurrently": "^3.1.0",
+    "mocha": "^3.1.2",
+    "nodemon": "^1.11.0",
+    "request": "^2.75.0",
+    "request-promise": "^4.1.1"
+  },
+  "name": "boilerplate-api-rest",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "cache-docker-npm": "cp package.json .package.json",
+    "start": "cross-env NODE_ENV=production node src/server.js",
+    "dev:watch": "cross-env NODE_ENV=development nodemon -L src/server.js",
+    "test": "cross-env NODE_ENV=test mocha test/top.js",
+    "test:watch": "nodemon -L --exec \"npm run test\"",
+    "dev:test:watch": "concurrently --kill-others --raw \"npm run test:watch\" \"npm run dev:watch\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

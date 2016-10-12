@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+
+    db:
+
+    api:
+        command: npm run test

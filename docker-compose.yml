@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+
+    db:
+        image: mongo:3
+        volumes:
+            - db_data:/data/db
+            - db_data:/data/configdb
+
+    api:
+        depends_on:
+            - db
+        build: .
+        environment:
+            MONGO_URL: mongodb://db:27017/sample
+            MONGO_URL_DEV: mongodb://db:27017/sample-development
+            MONGO_URL_TEST: mongodb://db:27017/sample-test
+
+volumes:
+    db_data:
