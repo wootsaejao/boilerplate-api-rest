@@ -6,7 +6,7 @@ const baseUri = common.baseUri
 const Hello = require('../../src/models/hello.model')
 
 describe('Hello', () => {
-    before((done) => {
+    before(done => {
         Hello.remove({}, (err) => {
             done()
         })

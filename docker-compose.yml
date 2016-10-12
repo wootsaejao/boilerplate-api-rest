@@ -13,6 +13,7 @@ services:
             - db
         build: .
         environment:
+            # DEBUG: "app*"
             MONGO_URL: mongodb://db:27017/sample
             MONGO_URL_DEV: mongodb://db:27017/sample-development
             MONGO_URL_TEST: mongodb://db:27017/sample-test

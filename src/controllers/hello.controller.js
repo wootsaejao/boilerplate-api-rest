@@ -1,32 +1,35 @@
+const async = require('asyncawait/async')
+const await = require('asyncawait/await')
+const debug = require('debug')
 const Boom = require('boom')
 
 const Hello = require('../models/hello.model')
 
-exports.getLatest = (request, reply) => {
-    Hello.findOne().sort('-_id').exec((err, doc) => {
-        if (err) {
-            console.error(err)
-            return reply( Boom.badImplementation() )
-        }
+const error = debug('app:hello:error')
 
+exports.getLatest = async (function(request, reply) {
+    try {
+        const doc = await (Hello.findOne().sort('-_id').lean())
         return reply(`Hello ${doc.name}.`)
-    })
-}
+    } catch (err) {
+        error(err)
+        return reply(Boom.badImplementation())
+    }
+})
 
-exports.post = (request, reply) => {
+exports.post = async (function(request, reply) {
     let instance = new Hello()
 
     instance.name = request.payload.name
 
-    instance.save((err, saved) => {
-        if (err) {
-            console.error(err)
-            return reply( Boom.badImplementation() )
-        }
-
+    try {
+        const saved = await (instance.save())
         const result = {
             result_id: saved._id,
         }
         return reply(result)
-    })
-}
+    } catch (err) {
+        error(err)
+        return reply(Boom.badImplementation())
+    }
+})
